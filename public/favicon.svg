@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Selo "Conferido": círculo accent (#1d4fb8, Azul institucional) com check on-accent. -->
+  <circle cx="16" cy="16" r="16" fill="#1d4fb8"/>
+  <path d="M9 16.6l4.6 4.6L23 11.4" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
