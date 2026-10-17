@@ -1,0 +1,96 @@
+---
+// Página inicial, na ordem do Design System:
+// Navbar → Hero → ToolsStrip → SectionHeader + FilterChips + ProjectCard → ResultCard → ProcessSteps → About → Timeline → CTABand.
+// Usada por / e por /categoria/<slug>/ (mesma página com o filtro já aplicado, para quem está sem JavaScript).
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import About from './About.astro';
+import Button from './Button.astro';
+import CTABand from './CTABand.astro';
+import FilterChips from './FilterChips.astro';
+import Hero from './Hero.astro';
+import Navbar from './Navbar.astro';
+import ProcessSteps from './ProcessSteps.astro';
+import ProjectCard from './ProjectCard.astro';
+import ResultCard from './ResultCard.astro';
+import SectionHeader from './SectionHeader.astro';
+import Timeline from './Timeline.astro';
+import ToolsStrip from './ToolsStrip.astro';
+import VerifiedSeal from './VerifiedSeal.astro';
+import foto from '../assets/foto.png';
+import { categorias, type Categoria } from '../data/categorias';
+import { contato, ferramentas, hero, passos, secoes, site, sobre } from '../data/site';
+
+interface Props { categoria?: Categoria }
+
+const { categoria } = Astro.props;
+
+const projetos = (await getCollection('projetos', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const resultados = await getCollection('resultados');
+const experiencia = await getCollection('experiencia');
+const disponiveis = categorias.map((c) => c.nome).filter((nome) => projetos.some((p) => p.data.category === nome));
+const destaque = projetos.find((p) => p.data.seal);
+---
+<Base
+  title={categoria ? `Projetos de ${categoria}` : undefined}
+  canonical={categoria ? '/' : undefined}
+>
+  <Navbar slot="nav" />
+
+  <Hero overline={hero.overline} title={hero.title} lead={hero.lead}>
+    <Button slot="actions" variant="primary" href="#projetos" icon="seta">Ver projetos</Button>
+    <Button slot="actions" variant="secondary" href={site.curriculo.href} icon="download" download>{site.curriculo.rotulo}</Button>
+    {destaque?.data.seal && (
+      <VerifiedSeal label={destaque.data.seal.label} source={destaque.data.seal.source} href={`/projetos/${destaque.id}/#como-conferi`} />
+    )}
+  </Hero>
+
+  <ToolsStrip items={ferramentas} />
+
+  <section class="pf-section" id="projetos" aria-labelledby="projetos-titulo">
+    <div class="pf-wrap">
+      <SectionHeader number="01" id="projetos-titulo" {...secoes.projetos} />
+      <div class="mb-8">
+        <FilterChips disponiveis={disponiveis} ativa={categoria} />
+      </div>
+      <div class="pf-grid pf-grid--3">
+        {projetos.map((p) => <ProjectCard projeto={p} hidden={!!categoria && p.data.category !== categoria} />)}
+      </div>
+    </div>
+  </section>
+
+  {resultados.length > 0 && (
+    <section class="pf-section pf-section--alt" id="resultados" aria-labelledby="resultados-titulo">
+      <div class="pf-wrap">
+        <SectionHeader id="resultados-titulo" {...secoes.resultados} />
+        <div class:list={['pf-grid', resultados.length === 3 ? 'pf-grid--3' : resultados.length > 1 && 'pf-grid--2', resultados.length === 1 && 'max-w-prose']}>
+          {resultados.map(({ data: r }) => <ResultCard label={r.label} number={r.number} text={r.text} context={r.context} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="pf-section" id="metodo" aria-labelledby="metodo-titulo">
+    <div class="pf-wrap">
+      <SectionHeader number="02" id="metodo-titulo" {...secoes.metodo} />
+      <ProcessSteps steps={passos} />
+    </div>
+  </section>
+
+  <section class="pf-section pf-section--alt" id="sobre" aria-labelledby="sobre-titulo">
+    <div class="pf-wrap">
+      <About photo={foto} photoAlt={sobre.fotoAlt} paragraph={sobre.paragrafo} items={sobre.itens}>
+        <SectionHeader slot="header" number="03" id="sobre-titulo" class="mb-0!" {...secoes.sobre} />
+      </About>
+    </div>
+  </section>
+
+  <section class="pf-section" id="experiencia" aria-labelledby="experiencia-titulo">
+    <div class="pf-wrap">
+      <SectionHeader number="04" id="experiencia-titulo" {...secoes.experiencia} />
+      <Timeline items={experiencia} />
+    </div>
+  </section>
+
+  <CTABand title={contato.title} text={contato.text} email={site.email} github={site.github} />
+</Base>

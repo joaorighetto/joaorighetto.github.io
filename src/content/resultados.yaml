@@ -1,0 +1,22 @@
+# Cards de resultado (ResultCard). Só números reais, que o leitor confere na página do projeto indicado.
+# A grade acompanha a quantidade: 1, 2, 3 (3 colunas) ou 4 (2×2).
+- id: boletins-conferidos
+  label: Eleições · TSE
+  number: "187"
+  text: boletins de urna conferidos byte a byte
+  context: Cada arquivo comparado com o do servidor oficial.
+  project: boletins-urna-pirassununga-2026
+
+- id: cargos-consolidados
+  label: Eleições · TSE
+  number: "5"
+  text: cargos consolidados em um único CSV
+  context: Por seção, cargo e opção de voto, com totais conferidos com o resultado oficial.
+  project: boletins-urna-pirassununga-2026
+
+- id: relatorios-integrados
+  label: Saneamento · SAEP
+  number: "4"
+  text: relatórios do sistema de gestão integrados
+  context: Estoque, saídas, entradas e pedidos de compra, executados diariamente há meses.
+  project: integracao-scpi-planilhas

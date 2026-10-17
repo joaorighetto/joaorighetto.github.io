@@ -1,0 +1,25 @@
+---
+// Página de projeto: Navbar → ProjectDetail → CTABand. Uma por arquivo em src/content/projetos/.
+import type { GetStaticPaths } from 'astro';
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CTABand from '../../components/CTABand.astro';
+import Navbar from '../../components/Navbar.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+import { contato, site } from '../../data/site';
+
+export const getStaticPaths = (async () => {
+  const projetos = await getCollection('projetos', ({ data }) => !data.draft);
+  return projetos.map((projeto) => ({ params: { slug: projeto.id }, props: { projeto } }));
+}) satisfies GetStaticPaths;
+
+const { projeto } = Astro.props;
+const { Content } = await render(projeto);
+---
+<Base title={projeto.data.title} description={projeto.data.summary}>
+  <Navbar slot="nav" current="projetos" />
+  <ProjectDetail projeto={projeto}>
+    <Content />
+  </ProjectDetail>
+  <CTABand title={contato.title} text={contato.text} email={site.email} github={site.github} />
+</Base>

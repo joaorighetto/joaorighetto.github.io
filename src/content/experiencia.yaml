@@ -1,0 +1,27 @@
+# Linha do tempo (Timeline), do mais recente para o mais antigo. A ordem do arquivo é a ordem da página.
+- id: saep
+  period: jan/2026 – atual
+  current: true
+  title: Chefe de Almoxarifado
+  org: SAEP, Serviço de Água e Esgoto de Pirassununga
+
+- id: supernova
+  period: 2023 – 2024
+  title: Desenvolvedor freelancer
+  org: Supernova
+  text: API REST em Django REST Framework; CMS em Strapi; painel com Supabase e FlutterFlow.
+
+- id: scaleai
+  period: jan – fev/2024
+  title: Code QA
+  org: ScaleAI
+
+- id: manipulador-telescopico
+  period: 2018–2022 e 2024
+  title: Operador de manipulador telescópico
+  org: Canteiros de obras, Inglaterra
+
+- id: formacao-ads
+  period: "2024"
+  title: Análise e Desenvolvimento de Sistemas
+  org: Formação · Faculdades Estácio

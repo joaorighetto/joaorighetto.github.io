@@ -1,0 +1,17 @@
+---
+// /categoria/<slug>/: a página inicial com o filtro já aplicado. É o destino dos chips sem JavaScript.
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import PaginaInicial from '../../components/PaginaInicial.astro';
+import { categorias } from '../../data/categorias';
+
+export const getStaticPaths = (async () => {
+  const projetos = await getCollection('projetos', ({ data }) => !data.draft);
+  return categorias
+    .filter((c) => projetos.some((p) => p.data.category === c.nome))
+    .map((c) => ({ params: { categoria: c.slug }, props: { nome: c.nome } }));
+}) satisfies GetStaticPaths;
+
+const { nome } = Astro.props;
+---
+<PaginaInicial categoria={nome} />

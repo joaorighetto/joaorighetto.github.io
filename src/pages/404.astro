@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Navbar from '../components/Navbar.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+---
+<Base title="Página não encontrada" noindex>
+  <Navbar slot="nav" />
+  <section class="pf-section">
+    <div class="pf-wrap">
+      <SectionHeader
+        level="h1"
+        label="Erro 404"
+        title='Esta página <span class="pf-hl">não existe</span>'
+        lead="O endereço pode ter mudado. Os projetos estão todos na página inicial."
+      />
+      <Button variant="primary" href="/#projetos" icon="seta">Ver projetos</Button>
+    </div>
+  </section>
+</Base>
