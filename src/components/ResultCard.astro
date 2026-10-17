@@ -1,0 +1,17 @@
+---
+// ResultCard: o título é o próprio resultado, com o número em accent. Só números reais.
+interface Props {
+  label: string;
+  number: string;
+  text: string;
+  context: string;
+}
+
+const { label, number, text, context } = Astro.props;
+---
+<article class="pf-result">
+  <span class="pf-label">{label}</span>
+  <h3 class="pf-h3-result"><span class="pf-result__num">{number}</span> {text}</h3>
+  <hr class="pf-divider" />
+  <p class="pf-result__ctx">{context}</p>
+</article>

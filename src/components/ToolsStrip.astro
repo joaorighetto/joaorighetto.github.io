@@ -1,0 +1,50 @@
+---
+// ToolsStrip: faixa escura com as ferramentas rolando devagar, botão "Pausar" (WCAG 2.2.2).
+// Com prefers-reduced-motion ou sem JavaScript, vira lista estática que quebra linha.
+import Icon from './Icon.astro';
+
+interface Props {
+  label?: string;
+  items: string[];
+}
+
+const { label = 'Ferramentas do dia a dia', items } = Astro.props;
+---
+<section class="pf-band pf-tools" aria-labelledby="ferramentas-titulo" data-tools>
+  <div class="pf-wrap">
+    <div class="pf-tools__head">
+      <h2 class="pf-label" id="ferramentas-titulo">{label}</h2>
+      <button class="pf-tools__pause" type="button" aria-pressed="false" data-tools-pause>
+        <Icon name="pausar" size="sm" class="tools-icone-pausar" />
+        <Icon name="tocar" size="sm" class="tools-icone-tocar" />
+        <span data-tools-rotulo>Pausar</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-tools__viewport">
+    <div class="pf-tools__track">
+      <ul class="pf-tools__list">{items.map((i) => <li>{i}</li>)}</ul>
+      <ul class="pf-tools__list" aria-hidden="true">{items.map((i) => <li>{i}</li>)}</ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  h2.pf-label { margin: 0; }
+  .pf-tools__pause :global(.tools-icone-tocar),
+  .pf-tools__pause[aria-pressed='true'] :global(.tools-icone-pausar) { display: none; }
+  .pf-tools__pause[aria-pressed='true'] :global(.tools-icone-tocar) { display: block; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tools]').forEach((faixa) => {
+    const botao = faixa.querySelector<HTMLButtonElement>('[data-tools-pause]');
+    const rotulo = faixa.querySelector('[data-tools-rotulo]');
+    botao?.addEventListener('click', () => {
+      const pausado = botao.getAttribute('aria-pressed') !== 'true';
+      botao.setAttribute('aria-pressed', String(pausado));
+      faixa.dataset.paused = String(pausado);
+      if (rotulo) rotulo.textContent = pausado ? 'Continuar' : 'Pausar';
+    });
+  });
+</script>

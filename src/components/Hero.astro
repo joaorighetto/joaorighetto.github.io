@@ -1,0 +1,20 @@
+---
+// Hero: topo centralizado. O título traz um único <mark class="pf-mark"> (marca-texto, uma vez por página).
+interface Props {
+  overline: string;
+  /** HTML do título, com a expressão final em <mark class="pf-mark">. */
+  title: string;
+  lead: string;
+}
+
+const { overline, title, lead } = Astro.props;
+---
+<section class="pf-hero" aria-labelledby="hero-titulo">
+  <div class="pf-wrap pf-hero__inner">
+    <span class="pf-overline">{overline}</span>
+    <h1 class="pf-display" id="hero-titulo" set:html={title} />
+    <p class="pf-lead">{lead}</p>
+    <div class="pf-actions"><slot name="actions" /></div>
+    <slot />
+  </div>
+</section>

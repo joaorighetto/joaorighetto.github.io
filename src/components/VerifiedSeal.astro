@@ -1,0 +1,20 @@
+---
+// VerifiedSeal: só onde a conferência aconteceu e está descrita na página do projeto.
+import Icon from './Icon.astro';
+
+interface Props {
+  variant?: 'full' | 'compact' | 'band';
+  label?: string;
+  source?: string;
+  href?: string;
+}
+
+const { variant = 'full', label = 'Conferido com a fonte oficial', source, href } = Astro.props;
+const text = variant === 'compact' ? 'Conferido' : label;
+const Tag = href ? 'a' : 'span';
+---
+<Tag class:list={['pf-seal', variant === 'compact' && 'pf-seal--compact', variant === 'band' && 'pf-seal--band']} href={href}>
+  <span class="pf-seal__icon"><Icon name="check" /></span>
+  <span class="pf-seal__label">{text}</span>
+  {source && variant !== 'compact' && <span class="pf-seal__src">{source}</span>}
+</Tag>

@@ -1,0 +1,25 @@
+---
+// SectionHeader: rótulo mono (com número quando a ordem informa algo), título com a expressão final em
+// <span class="pf-hl">, frase opcional. Alinhado à esquerda.
+interface Props {
+  label: string;
+  /** HTML do título, com a expressão final em <span class="pf-hl">. */
+  title: string;
+  lead?: string;
+  number?: string;
+  id?: string;
+  level?: 'h1' | 'h2';
+  class?: string;
+}
+
+const { label, title, lead, number, id, level = 'h2', class: className } = Astro.props;
+const Heading = level;
+---
+<header class:list={['pf-sechead', className]}>
+  <div class="pf-sechead__eyebrow">
+    {number && <span class="pf-step">{number}</span>}
+    <span class="pf-label">{label}</span>
+  </div>
+  <Heading class="pf-h2" id={id} set:html={title} />
+  {lead && <p>{lead}</p>}
+</header>

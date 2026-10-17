@@ -1,0 +1,21 @@
+---
+// Timeline: experiência e formação, do mais recente para o mais antigo. Item atual com marcador preenchido.
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { items: CollectionEntry<'experiencia'>[] }
+
+const { items } = Astro.props;
+---
+<ol class="pf-timeline" reversed>
+  {items.map(({ data: i }) => (
+    <li class:list={['pf-tl', i.current && 'pf-tl--current']}>
+      <span class="pf-tl__when">{i.period}</span>
+      <span class="pf-tl__dot" aria-hidden="true"></span>
+      <div class="pf-tl__body">
+        <h3 class="pf-h3">{i.title}</h3>
+        <span class="pf-tl__org">{i.org}</span>
+        {i.text && <p>{i.text}</p>}
+      </div>
+    </li>
+  ))}
+</ol>

@@ -1,0 +1,38 @@
+---
+// About: foto numa moldura tingida (se houver), texto curto e lista de práticas com check.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Icon from './Icon.astro';
+
+interface Item { title: string; text: string }
+interface Props {
+  photo?: ImageMetadata;
+  photoAlt?: string;
+  paragraph: string;
+  items: Item[];
+}
+
+const { photo, photoAlt = '', paragraph, items } = Astro.props;
+---
+<div class:list={['pf-about', !photo && 'pf-about--sem-foto']}>
+  {photo && (
+    <div class="pf-about__photo">
+      <Image src={photo} alt={photoAlt} widths={[320, 480, 720]} sizes="(min-width: 860px) 440px, 100vw" />
+    </div>
+  )}
+  <div class="pf-about__text">
+    <slot name="header" />
+    <p>{paragraph}</p>
+    <ul class="pf-checks">
+      {items.map((i) => (
+        <li>
+          <Icon name="check" />
+          <div>
+            <h3 class="pf-h4">{i.title}</h3>
+            <p>{i.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

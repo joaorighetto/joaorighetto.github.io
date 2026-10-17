@@ -1,0 +1,92 @@
+---
+// Navbar: barra fixa com nome, âncoras das seções e "Contato"; abaixo de 900 px os links vão para um menu.
+// Sem JavaScript o botão de menu some e "Contato" fica visível; as seções estão todas na página.
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+
+export type SecaoNav = 'projetos' | 'metodo' | 'sobre' | 'experiencia';
+
+interface Props {
+  /** Seção em que o leitor está (ex.: "projetos" na página de um projeto). */
+  current?: SecaoNav;
+}
+
+const { current } = Astro.props;
+
+const links: { id: SecaoNav; label: string }[] = [
+  { id: 'projetos', label: 'Projetos' },
+  { id: 'metodo', label: 'Método' },
+  { id: 'sobre', label: 'Sobre' },
+  { id: 'experiencia', label: 'Experiência' },
+];
+---
+<span class="absolute top-0 left-0 h-px w-px" data-nav-sentinela aria-hidden="true"></span>
+<header class="pf-nav" data-nav>
+  <div class="pf-wrap pf-nav__inner">
+    <a class="pf-nav__logo" href="/"><span class="pf-nav__mono">JMZR</span>João Marcos</a>
+    <nav aria-label="Seções">
+      <ul class="pf-nav__links">
+        {links.map((l) => (
+          <li><a class="pf-nav__link" href={`/#${l.id}`} aria-current={current === l.id ? 'true' : undefined}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <Button variant="primary" size="sm" href="/#contato" icon="envelope" class="pf-nav__cta pr-1" boxClass="size-8">Contato</Button>
+    <button class="pf-nav__toggle" type="button" aria-expanded="false" aria-controls="menu-celular" aria-label="Abrir menu" data-nav-toggle>
+      <Icon name="menu" class="nav-icone-abrir" />
+      <Icon name="fechar" class="nav-icone-fechar" />
+    </button>
+  </div>
+  <nav class="pf-nav__panel" id="menu-celular" aria-label="Menu" hidden>
+    <div class="pf-wrap">
+      <ul>
+        {links.map((l) => (
+          <li><a class="pf-nav__plink" href={`/#${l.id}`} aria-current={current === l.id ? 'true' : undefined}>{l.label}<Icon name="seta" size="sm" /></a></li>
+        ))}
+      </ul>
+      <Button variant="primary" href="/#contato" icon="envelope">Contato</Button>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .pf-nav__toggle :global(.nav-icone-fechar),
+  .pf-nav__toggle[aria-expanded='true'] :global(.nav-icone-abrir) { display: none; }
+  .pf-nav__toggle[aria-expanded='true'] :global(.nav-icone-fechar) { display: block; }
+  .pf-nav__panel:not([hidden]) { animation: nav-abrir var(--duration-base) var(--ease-expo); }
+  @keyframes nav-abrir { from { transform: translateY(calc(-1 * var(--space-2))); } }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const panel = document.getElementById('menu-celular');
+  const sentinela = document.querySelector('[data-nav-sentinela]');
+
+  if (nav && toggle && panel) {
+    const setOpen = (open: boolean, devolverFoco = false) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      panel.hidden = !open;
+      if (!open && devolverFoco) toggle.focus();
+    };
+
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    panel.addEventListener('click', (e) => {
+      if ((e.target as Element).closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) setOpen(false, true);
+    });
+    matchMedia('(min-width: 900px)').addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+
+    // Sombra só depois que a página rola.
+    if (sentinela) {
+      new IntersectionObserver(([entrada]) => {
+        nav.dataset.scrolled = String(!entrada.isIntersecting);
+      }).observe(sentinela);
+    }
+  }
+</script>

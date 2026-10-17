@@ -1,0 +1,64 @@
+---
+// FilterChips: filtra a grade de projetos por categoria.
+// Sem JavaScript, cada chip é um link para /categoria/<slug>/ (página estática já filtrada).
+// Com JavaScript, os links viram botões com aria-pressed que filtram ali mesmo, sem recarregar.
+import { categorias, type Categoria } from '../data/categorias';
+
+interface Props {
+  /** Categorias que têm projeto (chips de categorias vazias não aparecem). */
+  disponiveis: Categoria[];
+  ativa?: Categoria;
+}
+
+const { disponiveis, ativa } = Astro.props;
+const chips = [
+  { nome: 'Todos', href: '/#projetos', valor: '' },
+  ...categorias
+    .filter((c) => disponiveis.includes(c.nome))
+    .map((c) => ({ nome: c.nome, href: `/categoria/${c.slug}/#projetos`, valor: c.nome })),
+];
+const status = ativa ? `Mostrando projetos de ${ativa}.` : 'Mostrando todos os projetos.';
+---
+<div class="grid gap-3" data-filtro>
+  <div class="pf-chips" role="group" aria-label="Filtrar projetos por categoria">
+    {chips.map((c) => (
+      <a class="pf-chip" href={c.href} data-valor={c.valor} aria-current={(ativa ?? '') === c.valor ? 'page' : undefined}>{c.nome}</a>
+    ))}
+  </div>
+  <p class="m-0 text-small text-ink-muted" aria-live="polite" data-filtro-status>{status}</p>
+</div>
+
+<style>
+  a.pf-chip { text-decoration: none; }
+  .pf-chip[aria-current='page'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+</style>
+
+<script>
+  const filtro = document.querySelector<HTMLElement>('[data-filtro]');
+  const status = filtro?.querySelector('[data-filtro-status]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-categoria]');
+
+  if (filtro && status) {
+    const aplicar = (valor: string) => {
+      cards.forEach((card) => (card.hidden = valor !== '' && card.dataset.categoria !== valor));
+      filtro.querySelectorAll('.pf-chip').forEach((b) => b.setAttribute('aria-pressed', String(b.getAttribute('data-valor') === valor)));
+      status.textContent = valor ? `Mostrando projetos de ${valor}.` : 'Mostrando todos os projetos.';
+    };
+
+    // Troca cada link por um botão com o mesmo visual; o endereço acompanha o filtro.
+    filtro.querySelectorAll<HTMLAnchorElement>('a.pf-chip').forEach((link) => {
+      const botao = document.createElement('button');
+      botao.type = 'button';
+      botao.className = link.className;
+      botao.textContent = link.textContent;
+      botao.dataset.valor = link.dataset.valor ?? '';
+      botao.setAttribute('aria-pressed', String(link.hasAttribute('aria-current')));
+      const destino = link.pathname;
+      botao.addEventListener('click', () => {
+        aplicar(botao.dataset.valor ?? '');
+        history.replaceState(null, '', destino);
+      });
+      link.replaceWith(botao);
+    });
+  }
+</script>

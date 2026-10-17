@@ -1,0 +1,69 @@
+---
+// ProjectDetail: voltar, categoria, título, abertura, selo; mídia; blocos numerados (do Markdown);
+// Limites em caixa própria; ficha lateral fixa a partir de 960 px.
+import type { CollectionEntry } from 'astro:content';
+import Button from './Button.astro';
+import EmbedFrame from './EmbedFrame.astro';
+import MediaFrame from './MediaFrame.astro';
+import VerifiedSeal from './VerifiedSeal.astro';
+
+interface Props { projeto: CollectionEntry<'projetos'> }
+
+const { projeto } = Astro.props;
+const p = projeto.data;
+---
+<article class="pf-section py-12">
+  <div class="pf-wrap">
+    <Button variant="link" href="/#projetos" icon="seta" class="mb-4 [&>svg]:-scale-x-100">Todos os projetos</Button>
+    <header class="pf-detail__head">
+      <span class="pf-label">{p.category}{p.status && <span class="text-ink-muted"> · {p.status}</span>}</span>
+      <h1 class="pf-h2 detalhe-titulo">{p.title}</h1>
+      <p class="pf-lead">{p.lead}</p>
+      {p.seal && <VerifiedSeal label={p.seal.label} source={p.seal.source} href="#como-conferi" />}
+    </header>
+
+    {p.embed ? (
+      <div class="mt-8"><EmbedFrame {...p.embed} /></div>
+    ) : (
+      <MediaFrame kind={p.media.kind} src={p.media.src} alt={p.media.alt} class="mt-8 rounded-lg border border-line" eager />
+    )}
+
+    <div class="pf-detail__layout">
+      <div class="pf-prose">
+        <slot />
+        {p.limits && (
+          <section class="pf-limits" aria-labelledby="limites">
+            <span class="pf-label text-ink-muted">Limites</span>
+            <h2 class="pf-h3-result" id="limites">{p.limits.title}</h2>
+            {p.limits.items.length === 1 ? <p>{p.limits.items[0]}</p> : <ul>{p.limits.items.map((i) => <li>{i}</li>)}</ul>}
+          </section>
+        )}
+      </div>
+
+      <aside class="pf-meta" aria-label="Ficha do projeto">
+        <dl>
+          <div><dt>Categoria</dt><dd>{p.category}</dd></div>
+          {p.status && <div><dt>Situação</dt><dd>{p.status}</dd></div>}
+          {p.officialSource && <div><dt>Fonte oficial</dt><dd>{p.officialSource}</dd></div>}
+          {p.context && <div><dt>Contexto</dt><dd>{p.context}</dd></div>}
+          {p.year && <div><dt>Ano</dt><dd>{p.year}</dd></div>}
+          <div><dt>Tecnologias</dt><dd><ul class="pf-stack">{p.stack.map((t) => <li>{t}</li>)}</ul></dd></div>
+          {(p.links.code || p.links.demo || p.links.data) && (
+            <div>
+              <dt>Links</dt>
+              <dd class="grid justify-items-start">
+                {p.links.code && <Button variant="link" href={p.links.code} icon="codigo">Código</Button>}
+                {p.links.demo && <Button variant="link" href={p.links.demo} icon="externo" iconAfter>Demonstração</Button>}
+                {p.links.data && <Button variant="link" href={p.links.data} icon="download">Dados</Button>}
+              </dd>
+            </div>
+          )}
+        </dl>
+      </aside>
+    </div>
+  </div>
+</article>
+
+<style>
+  .detalhe-titulo { font-size: clamp(32px, 4vw, 44px); line-height: 1.1; }
+</style>

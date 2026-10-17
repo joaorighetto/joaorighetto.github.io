@@ -1,0 +1,70 @@
+---
+// CTABand: bloco final escuro com o e-mail por extenso e copiável e o link do GitHub. Um por página.
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import VerifiedSeal from './VerifiedSeal.astro';
+
+interface Props {
+  /** HTML do título, com a expressão final em <span class="pf-hl">. */
+  title: string;
+  text: string;
+  email: string;
+  github: string;
+}
+
+const { title, text, email, github } = Astro.props;
+const githubCurto = github.replace(/^https?:\/\//, '');
+---
+<section class="pf-band pf-cta" id="contato" aria-labelledby="contato-titulo">
+  <div class="pf-wrap pf-cta__inner">
+    <span class="pf-overline">Contato</span>
+    <h2 class="pf-h2" id="contato-titulo" set:html={title} />
+    <p>{text}</p>
+    <div class="pf-contact">
+      <div class="pf-contact__row">
+        <Icon name="envelope" />
+        <a class="pf-contact__val" href={`mailto:${email}`} data-email>{email}</a>
+        <Button variant="band" icon="copiar" data-copy><span data-copy-rotulo>Copiar e-mail</span></Button>
+      </div>
+      <div class="pf-contact__row">
+        <Icon name="codigo" />
+        <a class="pf-contact__val" href={github}>{githubCurto}</a>
+        <Icon name="externo" size="sm" />
+      </div>
+    </div>
+    <VerifiedSeal variant="band" />
+    <span class="text-small text-band-muted" role="status" data-copy-status></span>
+  </div>
+</section>
+
+<script>
+  const botao = document.querySelector<HTMLButtonElement>('[data-copy]');
+  const email = document.querySelector<HTMLElement>('[data-email]');
+  const rotulo = document.querySelector('[data-copy-rotulo]');
+  const status = document.querySelector('[data-copy-status]');
+
+  if (botao && email && rotulo && status) {
+    let timer: number | undefined;
+    const copiado = () => {
+      rotulo.textContent = 'Copiado';
+      status.textContent = 'E-mail copiado para a área de transferência.';
+      clearTimeout(timer);
+      timer = window.setTimeout(() => (rotulo.textContent = 'Copiar e-mail'), 2000);
+    };
+    const falhou = () => {
+      const r = document.createRange();
+      r.selectNodeContents(email);
+      const s = getSelection();
+      s?.removeAllRanges();
+      s?.addRange(r);
+      status.textContent = 'E-mail selecionado. Use Ctrl+C para copiar.';
+    };
+    botao.addEventListener('click', () => {
+      try {
+        navigator.clipboard.writeText(email.textContent?.trim() ?? '').then(copiado, falhou);
+      } catch {
+        falhou();
+      }
+    });
+  }
+</script>

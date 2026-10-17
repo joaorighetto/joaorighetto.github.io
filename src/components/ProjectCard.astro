@@ -1,0 +1,42 @@
+---
+// ProjectCard: mídia, categoria, título (link principal para a página), resumo, como foi conferido, tags e links.
+import type { CollectionEntry } from 'astro:content';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import MediaFrame from './MediaFrame.astro';
+import VerifiedSeal from './VerifiedSeal.astro';
+
+interface Props {
+  projeto: CollectionEntry<'projetos'>;
+  /** Escondido pelo filtro (páginas de categoria, sem JavaScript). */
+  hidden?: boolean;
+}
+
+const { projeto, hidden = false } = Astro.props;
+const p = projeto.data;
+const href = `/projetos/${projeto.id}/`;
+---
+<article class="pf-card" data-categoria={p.category} hidden={hidden}>
+  <MediaFrame kind={p.media.kind} src={p.media.src} alt={p.media.alt} />
+  <div class="pf-card__body">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <span class="pf-label">{p.category}</span>
+      {p.seal && <VerifiedSeal variant="compact" />}
+      {p.status && <span class="pf-label text-ink-muted">{p.status}</span>}
+    </div>
+    <h3 class="pf-h3 pf-card__title"><a href={href}>{p.title}</a></h3>
+    <p class="pf-card__summary">{p.summary}</p>
+    <p class="pf-card__check">
+      <Icon name="check" size="sm" />
+      <span><b>Como foi conferido:</b> {p.verification}</span>
+    </p>
+    <hr class="pf-divider" />
+    <ul class="pf-tags" aria-label="Tecnologias">{p.tags.map((t) => <li>{t}</li>)}</ul>
+    {(p.links.code || p.links.demo) && (
+      <div class="pf-card__links">
+        {p.links.code && <Button variant="link" href={p.links.code} icon="codigo">Código<span class="sr-only"> de {p.title}</span></Button>}
+        {p.links.demo && <Button variant="link" href={p.links.demo} icon="externo" iconAfter>Demonstração<span class="sr-only"> de {p.title}</span></Button>}
+      </div>
+    )}
+  </div>
+</article>

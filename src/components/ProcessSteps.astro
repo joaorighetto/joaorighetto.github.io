@@ -1,0 +1,28 @@
+---
+// ProcessSteps: exatamente 3 passos (coletar → conferir → entregar), com esquemas de linha do Design System.
+import Icon from './Icon.astro';
+
+interface Passo { title: string; text: string }
+interface Props { steps: [Passo, Passo, Passo] }
+
+const { steps } = Astro.props;
+
+const figuras = [
+  '<rect x="8" y="10" width="40" height="44" rx="4"/><path d="M16 22h24M16 30h24M16 38h16"/><path d="M56 32h28"/><path d="M78 26l6 6-6 6"/><rect x="90" y="16" width="24" height="32" rx="3"/><path d="M96 26h12M96 32h12M96 38h8"/>',
+  '<rect x="10" y="12" width="36" height="40" rx="4"/><path d="M18 24h20M18 32h20M18 40h12"/><rect x="74" y="12" width="36" height="40" rx="4"/><path d="M82 24h20M82 32h20M82 40h12"/><path d="M52 26h16M52 38h16"/>',
+  '<rect x="22" y="8" width="76" height="48" rx="4"/><path d="M22 20h76"/><path d="M34 46V36M46 46V30M58 46V38M70 46V26M82 46V34"/>',
+];
+---
+<ol class="pf-steps">
+  {steps.map((s, i) => (
+    <>
+      {i > 0 && <li class="pf-steps__arrow" aria-hidden="true"><Icon name="seta" /></li>}
+      <li class="pf-stepcard">
+        <div class="pf-stepcard__fig"><svg viewBox="0 0 120 64" aria-hidden="true" set:html={figuras[i]} /></div>
+        <span class="pf-step">{String(i + 1).padStart(2, '0')}</span>
+        <h3 class="pf-h3">{s.title}</h3>
+        <p>{s.text}</p>
+      </li>
+    </>
+  ))}
+</ol>

@@ -1,0 +1,63 @@
+---
+// EmbedFrame: mapa ou painel interativo. Mostra primeiro a imagem estática; o iframe só carrega quando o
+// leitor toca em "Toque para interagir" (economiza dados e não prende a rolagem no celular). Esc devolve o foco.
+// Sem JavaScript fica a imagem estática com "Abrir em nova aba".
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  kind: 'Mapa interativo' | 'Painel';
+  title: string;
+  src: string;
+  /** Arquivo em src/assets/projetos/. */
+  staticImage: string;
+  staticAlt: string;
+  /** "Fonte: … · coletado em …" */
+  source: string;
+  dataUrl?: string;
+  tall?: boolean;
+}
+
+const { kind, title, src, staticImage, staticAlt, source, dataUrl, tall = false } = Astro.props;
+const imagens = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projetos/**/*.{png,jpg,jpeg,webp,svg}', { eager: true });
+const imagem = imagens[`/src/assets/projetos/${staticImage}`]?.default;
+if (!imagem) throw new Error(`EmbedFrame: imagem estática não encontrada: ${staticImage}`);
+---
+<figure class="pf-embed m-0" data-embed>
+  <div class="pf-embed__bar">
+    <div class="pf-embed__title"><span class="pf-label">{kind}</span><strong>{title}</strong></div>
+    <Button variant="link" size="sm" href={src} icon="externo" iconAfter target="_blank" rel="noopener">Abrir em nova aba</Button>
+  </div>
+  <div class:list={['pf-embed__stage', tall && 'pf-embed__stage--4x3']}>
+    <Image src={imagem} alt={staticAlt} widths={[480, 960, 1440]} sizes="(min-width: 1120px) 1072px, 100vw" />
+    <template data-embed-iframe>
+      <iframe src={src} title={title} loading="lazy"></iframe>
+    </template>
+    <button class="pf-embed__shield" type="button" aria-label={`Ativar ${kind.toLowerCase()}: ${title}`} data-embed-ativar>
+      <span><Icon name="mao" />Toque para interagir</span>
+    </button>
+  </div>
+  <figcaption class="pf-embed__foot">
+    <span>{source}</span>
+    {dataUrl && <a class="pf-btn pf-btn--link min-h-0" href={dataUrl}>Baixar dados (CSV)</a>}
+  </figcaption>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-embed]').forEach((moldura) => {
+    const ativar = moldura.querySelector<HTMLButtonElement>('[data-embed-ativar]');
+    const modelo = moldura.querySelector<HTMLTemplateElement>('[data-embed-iframe]');
+    ativar?.addEventListener('click', () => {
+      if (!modelo) return;
+      const iframe = modelo.content.firstElementChild!.cloneNode(true) as HTMLIFrameElement;
+      ativar.replaceWith(iframe);
+      iframe.tabIndex = 0;
+      iframe.focus();
+      moldura.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') moldura.querySelector<HTMLElement>('.pf-embed__bar a')?.focus();
+      });
+    });
+  });
+</script>

@@ -1,0 +1,44 @@
+---
+// Button do Design System: primary (ícone no círculo), secondary (ícone antes), link (ícone antes ou depois)
+// e band (sobre a faixa escura). Com href vira <a>; sem href, <button type="button">.
+import type { HTMLAttributes } from 'astro/types';
+import Icon, { type IconName } from './Icon.astro';
+
+type Props = Omit<HTMLAttributes<'a'> & HTMLAttributes<'button'>, 'type'> & {
+  variant?: 'primary' | 'secondary' | 'link' | 'band';
+  size?: 'md' | 'sm';
+  href?: string;
+  icon?: IconName;
+  /** Ícone depois do rótulo (link). No primary o ícone fica sempre no círculo à direita. */
+  iconAfter?: boolean;
+  boxClass?: string;
+};
+
+const {
+  variant = 'primary', size = 'md', href, icon, iconAfter = false,
+  class: className, boxClass, ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const classes = ['pf-btn', `pf-btn--${variant}`, size === 'sm' && variant !== 'link' && 'pf-btn--sm', className];
+const iconSize = variant === 'link' || variant === 'band' ? 'sm' : 'md';
+const isArrow = icon === 'seta';
+---
+<Tag class:list={classes} href={href} type={href ? undefined : 'button'} {...rest}>
+  {variant === 'primary' ? (
+    <>
+      <slot />
+      {icon && (
+        <span class:list={['pf-btn__box', boxClass]}>
+          <Icon name={icon} size={size === 'sm' ? 'sm' : 'md'} class={isArrow ? 'pf-btn__arrow' : undefined} />
+        </span>
+      )}
+    </>
+  ) : (
+    <>
+      {icon && !iconAfter && <Icon name={icon} size={iconSize} />}
+      <slot />
+      {icon && iconAfter && <Icon name={icon} size={iconSize} class={isArrow ? 'pf-btn__arrow' : undefined} />}
+    </>
+  )}
+</Tag>
