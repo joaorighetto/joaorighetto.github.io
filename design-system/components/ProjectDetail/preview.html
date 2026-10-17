@@ -1,0 +1,32 @@
+<!-- @dsCard group="Páginas" height=1180 page subtitle="Problema, o que fiz, como conferi, limites, tecnologias" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>preview</title>
+<style>
+.a1{fill:var(--accent)} .a2{fill:var(--accent);opacity:.55} .a3{fill:var(--accent);opacity:.28} .a4{fill:var(--accent);opacity:.12}
+.ln{stroke:var(--line);fill:none;stroke-width:1} .lns{stroke:var(--line-strong);fill:none;stroke-width:1.25}
+.pc{fill:var(--bg-raised)} .pa{fill:var(--bg-alt)} .ik{fill:var(--ink)} .im{fill:var(--ink-muted)} .st{stroke:var(--accent);fill:none;stroke-width:1.5}
+.tx{font-family:var(--font-label);font-size:10px;fill:var(--ink-muted);letter-spacing:.04em} .txk{font-family:var(--font-label);font-size:10px;fill:var(--ink)} .txa{font-family:var(--font-label);font-size:10px;fill:var(--accent);font-weight:600}
+</style></head>
+<body>
+<div class="pf-section" style="padding-block:var(--space-12)"><div class="pf-wrap">
+<a class="pf-btn pf-btn--link" href="#" style="margin-bottom:var(--space-4)"><svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true" style="transform:scaleX(-1)"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>Todos os projetos</a>
+<header class="pf-detail__head"><span class="pf-label">Dados públicos</span><h1 class="pf-h2" style="font-size:clamp(32px,4vw,44px);line-height:1.1">Coleta de boletins de urna</h1>
+<p class="pf-lead">Script que baixa os boletins de urna publicados pelo TSE e confere cada arquivo com o original.</p>
+<span class="pf-seal"><span class="pf-seal__icon"><svg class="pf-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span class="pf-seal__label">187 boletins conferidos byte a byte</span><span class="pf-seal__src">TSE</span></span></header>
+<div class="pf-media" style="margin-top:var(--space-8);border:var(--border-width) solid var(--line);border-radius:var(--radius-lg)"><svg class="pf-media__piece" viewBox="0 0 320 200" preserveAspectRatio="xMinYMin slice" role="img" aria-label="Trecho de tabela com arquivos, origem e resultado da conferência"><rect class="pc" width="320" height="200"/><rect class="pa" width="320" height="30"/><text x="14" y="19" class="tx">ARQUIVO</text><text x="128" y="19" class="tx">ORIGEM</text><text x="208" y="19" class="tx">CONFERÊNCIA</text><path class="ln" d="M0 30.5 H320"/><text x="14" y="51" class="txk">bu_0001.bu</text><text x="128" y="51" class="txk">TSE</text><rect x="206" y="39" width="74" height="17" rx="8.5" class="a4"/><text x="214" y="51" class="txa">✓ idêntico</text><path class="ln" d="M0 64.5 H320"/><text x="14" y="85" class="txk">bu_0002.bu</text><text x="128" y="85" class="txk">TSE</text><rect x="206" y="73" width="74" height="17" rx="8.5" class="a4"/><text x="214" y="85" class="txa">✓ idêntico</text><path class="ln" d="M0 98.5 H320"/><text x="14" y="119" class="txk">bu_0003.bu</text><text x="128" y="119" class="txk">TSE</text><rect x="206" y="107" width="74" height="17" rx="8.5" class="a4"/><text x="214" y="119" class="txa">✓ idêntico</text><path class="ln" d="M0 132.5 H320"/><text x="14" y="153" class="txk">bu_0004.bu</text><text x="128" y="153" class="txk">TSE</text><rect x="206" y="141" width="74" height="17" rx="8.5" class="a4"/><text x="214" y="153" class="txa">✓ idêntico</text><path class="ln" d="M0 166.5 H320"/><text x="14" y="187" class="txk">bu_0005.bu</text><text x="128" y="187" class="txk">TSE</text><rect x="206" y="175" width="74" height="17" rx="8.5" class="a4"/><text x="214" y="187" class="txa">✓ idêntico</text><path class="ln" d="M0 200.5 H320"/></svg></div>
+<div class="pf-detail__layout">
+<div class="pf-prose">
+<section id="problema"><span class="pf-step">01</span><h2 class="pf-h3-result">Problema</h2><p>Os boletins de urna são publicados pelo TSE arquivo por arquivo. Juntar e conferir à mão é lento e deixa erro passar sem ninguém ver.</p></section>
+<section id="o-que-fiz"><span class="pf-step">02</span><h2 class="pf-h3-result">O que fiz</h2><ul><li>Script em Python que baixa os boletins e guarda cada arquivo com a origem e a data da coleta.</li><li>[Outra etapa real do projeto.]</li></ul></section>
+<section id="como-conferi"><span class="pf-step">03</span><h2 class="pf-h3-result">Como conferi</h2><p>Cada um dos 187 arquivos foi comparado byte a byte com o publicado pelo TSE. [Descreva a ferramenta usada, por exemplo <code>cmp</code> ou hash, e onde está o registro.]</p></section>
+<section id="limites" class="pf-limits"><span class="pf-label" style="color:var(--ink-muted)">Limites</span><h2 class="pf-h3-result">O que esta conferência não garante</h2><p>Ela mostra que os arquivos são idênticos aos publicados. Não audita a urna nem a totalização.</p></section>
+</div>
+<aside class="pf-meta" aria-label="Ficha do projeto"><dl>
+<div><dt>Categoria</dt><dd>Dados públicos</dd></div><div><dt>Fonte oficial</dt><dd>Tribunal Superior Eleitoral</dd></div><div><dt>Ano</dt><dd>[ano]</dd></div>
+<div><dt>Tecnologias</dt><dd><ul class="pf-stack"><li>Python</li><li>[biblioteca]</li></ul></dd></div>
+<div><dt>Links</dt><dd style="display:grid;justify-items:start"><a class="pf-btn pf-btn--link" href="#"><svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M13.5 5l-3 14"/></svg>Código</a><a class="pf-btn pf-btn--link" href="#">Demonstração<svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></dd></div>
+</dl></aside></div></div></div>
+
+</body>
+</html>

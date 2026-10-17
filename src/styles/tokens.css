@@ -1,0 +1,143 @@
+/* Portfólio João Marcos · tokens (Azul institucional)
+   Gerado de tokens.json do Design System. Não edite à mão: mude o tokens.json e gere de novo.
+   Tema: claro por padrão; escuro por preferência do sistema; data-theme="light|dark" no <html> força. */
+
+@font-face {
+  font-family: "Schibsted Grotesk";
+  src: url("/fonts/schibsted-grotesk-latin-wght-normal.woff2") format("woff2");
+  font-weight: 400 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-alt: #f3f6f9;
+  --bg-raised: #ffffff;
+  --ink: #0e1726;
+  --ink-muted: #4b5768;
+  --ink-disabled: #97a2b0;
+  --line: #e1e7ee;
+  --line-strong: #7d8a9b;
+  --disabled-bg: #eef1f5;
+  --accent: #1d4fb8;
+  --accent-strong: #163d8f;
+  --accent-soft: #eaf0fb;
+  --accent-highlight: #1d4fb824;
+  --accent-glow: #1d4fb81f;
+  --on-accent: #ffffff;
+  --band-bg: #0a0f14;
+  --band-ink: #e6ecf2;
+  --band-muted: #9aa8b7;
+  --band-line: #1c2733;
+  --band-dot: #ffffff1a;
+  --band-accent: #9dbcff;
+  --link: var(--accent-strong);
+  --focus-ring: var(--accent-strong);
+  --shadow-nav: 0 1px 0 #e1e7ee, 0 8px 24px -16px rgba(14,23,38,0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0b1117;
+    --bg-alt: #111a22;
+    --bg-raised: #0f171f;
+    --ink: #e6ecf2;
+    --ink-muted: #9aa8b7;
+    --ink-disabled: #566476;
+    --line: #223040;
+    --line-strong: #66768a;
+    --disabled-bg: #16202a;
+    --accent: #86abff;
+    --accent-strong: #b3caff;
+    --accent-soft: #14223a;
+    --accent-highlight: #86abff33;
+    --accent-glow: #86abff1a;
+    --on-accent: #0b1117;
+    --band-bg: #05080c;
+    --band-ink: #e6ecf2;
+    --band-muted: #9aa8b7;
+    --band-line: #1c2733;
+    --band-dot: #ffffff14;
+    --band-accent: #9dbcff;
+    --link: var(--accent-strong);
+    --focus-ring: var(--accent-strong);
+    --shadow-nav: 0 1px 0 #223040;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b1117;
+  --bg-alt: #111a22;
+  --bg-raised: #0f171f;
+  --ink: #e6ecf2;
+  --ink-muted: #9aa8b7;
+  --ink-disabled: #566476;
+  --line: #223040;
+  --line-strong: #66768a;
+  --disabled-bg: #16202a;
+  --accent: #86abff;
+  --accent-strong: #b3caff;
+  --accent-soft: #14223a;
+  --accent-highlight: #86abff33;
+  --accent-glow: #86abff1a;
+  --on-accent: #0b1117;
+  --band-bg: #05080c;
+  --band-ink: #e6ecf2;
+  --band-muted: #9aa8b7;
+  --band-line: #1c2733;
+  --band-dot: #ffffff14;
+  --band-accent: #9dbcff;
+  --link: var(--accent-strong);
+  --focus-ring: var(--accent-strong);
+  --shadow-nav: 0 1px 0 #223040;
+}
+
+:root {
+  --font-text: "Schibsted Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-label: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+  --container-max: 1120px;
+  --prose-max: 680px;
+  --hero-max: 880px;
+  --nav-height: 64px;
+  --touch-min: 44px;
+  --border-width: 1px;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 600ms;
+  --duration-marquee: 48s;
+  --shadow-none: none;
+}

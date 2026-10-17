@@ -1,0 +1,23 @@
+<!-- @dsCard group="Projetos" height=260 subtitle="Todos · Dados públicos · Automação · Sistemas" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>preview</title>
+<style>
+.a1{fill:var(--accent)} .a2{fill:var(--accent);opacity:.55} .a3{fill:var(--accent);opacity:.28} .a4{fill:var(--accent);opacity:.12}
+.ln{stroke:var(--line);fill:none;stroke-width:1} .lns{stroke:var(--line-strong);fill:none;stroke-width:1.25}
+.pc{fill:var(--bg-raised)} .pa{fill:var(--bg-alt)} .ik{fill:var(--ink)} .im{fill:var(--ink-muted)} .st{stroke:var(--accent);fill:none;stroke-width:1.5}
+.tx{font-family:var(--font-label);font-size:10px;fill:var(--ink-muted);letter-spacing:.04em} .txk{font-family:var(--font-label);font-size:10px;fill:var(--ink)} .txa{font-family:var(--font-label);font-size:10px;fill:var(--accent);font-weight:600}
+</style></head>
+<body>
+<div class="pv">
+<div class="pv-col" style="justify-items:stretch"><span class="pv-cap">Interativo · Todos ativo</span><div class="pf-chips" role="group" aria-label="Filtrar projetos por categoria" id="chips"><button class="pf-chip" type="button" aria-pressed="true">Todos</button><button class="pf-chip" type="button" aria-pressed="false">Dados públicos</button><button class="pf-chip" type="button" aria-pressed="false">Automação</button><button class="pf-chip" type="button" aria-pressed="false">Sistemas</button></div><p class="pf-muted" style="margin:0;font-size:14px" aria-live="polite" id="chips-status">Mostrando todos os projetos.</p></div>
+<div class="pv-row">
+<div class="pv-col"><span class="pv-cap">Ativo</span><button class="pf-chip" type="button" aria-pressed="true">Todos</button></div>
+<div class="pv-col"><span class="pv-cap">Normal</span><button class="pf-chip" type="button" aria-pressed="false">Sistemas</button></div>
+<div class="pv-col"><span class="pv-cap">Hover</span><button class="pf-chip" type="button" aria-pressed="false" data-state="hover">Dados públicos</button></div>
+<div class="pv-col"><span class="pv-cap">Foco</span><button class="pf-chip" type="button" aria-pressed="false" data-state="focus">Automação</button></div>
+<div class="pv-col"><span class="pv-cap">Desabilitado (sem projetos)</span><button class="pf-chip" type="button" disabled>Sistemas</button></div>
+</div></div>
+<script>var g=document.getElementById('chips'),s=document.getElementById('chips-status');g.addEventListener('click',function(e){var b=e.target.closest('.pf-chip');if(!b)return;g.querySelectorAll('.pf-chip').forEach(function(c){c.setAttribute('aria-pressed',String(c===b))});s.textContent=b.textContent==='Todos'?'Mostrando todos os projetos.':'Mostrando projetos de '+b.textContent+'.';});</script>
+</body>
+</html>

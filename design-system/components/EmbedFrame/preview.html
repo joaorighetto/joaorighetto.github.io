@@ -1,0 +1,29 @@
+<!-- @dsCard group="Conteúdo" height=560 subtitle="Moldura para mapa ou painel incorporado" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>preview</title>
+<style>
+.a1{fill:var(--accent)} .a2{fill:var(--accent);opacity:.55} .a3{fill:var(--accent);opacity:.28} .a4{fill:var(--accent);opacity:.12}
+.ln{stroke:var(--line);fill:none;stroke-width:1} .lns{stroke:var(--line-strong);fill:none;stroke-width:1.25}
+.pc{fill:var(--bg-raised)} .pa{fill:var(--bg-alt)} .ik{fill:var(--ink)} .im{fill:var(--ink-muted)} .st{stroke:var(--accent);fill:none;stroke-width:1.5}
+.tx{font-family:var(--font-label);font-size:10px;fill:var(--ink-muted);letter-spacing:.04em} .txk{font-family:var(--font-label);font-size:10px;fill:var(--ink)} .txa{font-family:var(--font-label);font-size:10px;fill:var(--accent);font-weight:600}
+</style></head>
+<body>
+<div class="pv"><figure class="pf-embed" style="margin:0">
+<div class="pf-embed__bar"><div class="pf-embed__title"><span class="pf-label">Mapa interativo</span><strong>Seções eleitorais por zona</strong></div><a class="pf-btn pf-btn--link pf-btn--sm" href="#">Abrir em nova aba<svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div>
+<div class="pf-embed__stage"><svg  viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustração de mapa coroplético com regiões em quatro intensidades de cor">
+<rect class="pa" width="320" height="200"/>
+<path class="a3" d="M40 30 L120 22 L138 70 L96 96 L48 84 Z"/><path class="a1" d="M120 22 L200 34 L214 80 L138 70 Z"/>
+<path class="a2" d="M138 70 L214 80 L230 128 L170 150 L120 120 L96 96 Z"/><path class="a4" d="M48 84 L96 96 L120 120 L100 168 L40 160 Z"/>
+<path class="a3" d="M200 34 L280 46 L286 110 L230 128 L214 80 Z"/><path class="a2" d="M120 120 L170 150 L160 186 L100 168 Z"/>
+<path class="a4" d="M170 150 L230 128 L286 110 L290 178 L160 186 Z"/>
+<path class="ln" d="M40 30 L120 22 L200 34 L280 46 L286 110 L290 178 L160 186 L100 168 L40 160 Z" style="stroke:var(--line-strong)"/>
+<path class="ln" d="M120 22 L138 70 L96 96 L48 84 M138 70 L214 80 L200 34 M214 80 L230 128 L286 110 M230 128 L170 150 L120 120 L96 96 M120 120 L100 168 M170 150 L160 186" style="stroke:var(--bg-raised)"/>
+<circle cx="176" cy="104" r="4" class="ik"/><rect x="188" y="96" width="62" height="16" rx="4" class="pc"/><text x="194" y="107" class="txk">sede</text>
+<rect x="10" y="10" width="78" height="44" rx="6" class="pc"/><rect x="18" y="20" width="10" height="6" class="a4"/><rect x="30" y="20" width="10" height="6" class="a3"/><rect x="42" y="20" width="10" height="6" class="a2"/><rect x="54" y="20" width="10" height="6" class="a1"/><text x="18" y="42" class="tx">LEGENDA</text>
+</svg><button class="pf-embed__shield" type="button" aria-label="Ativar mapa interativo"><span><svg class="pf-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 10V4.5a1.5 1.5 0 0 1 3 0V11"/><path d="M15 10.5V6.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3.6 13.6a1.5 1.5 0 0 1 2.4-1.8L9 15"/></svg>Toque para interagir</span></button></div>
+<figcaption class="pf-embed__foot"><span>Fonte: TSE · dados abertos · coletado em [data]</span><a class="pf-btn pf-btn--link" style="min-height:0" href="#">Baixar dados (CSV)</a></figcaption>
+</figure></div>
+
+</body>
+</html>

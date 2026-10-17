@@ -1,0 +1,17 @@
+<!-- @dsCard group="Faixas" height=200 subtitle="Faixa escura com ferramentas em texto, rolando" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>preview</title>
+<style>
+.a1{fill:var(--accent)} .a2{fill:var(--accent);opacity:.55} .a3{fill:var(--accent);opacity:.28} .a4{fill:var(--accent);opacity:.12}
+.ln{stroke:var(--line);fill:none;stroke-width:1} .lns{stroke:var(--line-strong);fill:none;stroke-width:1.25}
+.pc{fill:var(--bg-raised)} .pa{fill:var(--bg-alt)} .ik{fill:var(--ink)} .im{fill:var(--ink-muted)} .st{stroke:var(--accent);fill:none;stroke-width:1.5}
+.tx{font-family:var(--font-label);font-size:10px;fill:var(--ink-muted);letter-spacing:.04em} .txk{font-family:var(--font-label);font-size:10px;fill:var(--ink)} .txa{font-family:var(--font-label);font-size:10px;fill:var(--accent);font-weight:600}
+</style></head>
+<body>
+<section class="pf-band pf-tools" aria-labelledby="tools-t" id="tools"><div class="pf-wrap"><div class="pf-tools__head"><span class="pf-label" id="tools-t">Ferramentas do dia a dia</span><button class="pf-tools__pause" type="button" aria-pressed="false"><svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12"/><path d="M15 6v12"/></svg><span>Pausar</span></button></div></div>
+<div class="pf-tools__viewport"><div class="pf-tools__track"><ul class="pf-tools__list"><li>Python</li><li>Pandas</li><li>Django</li><li>MySQL / MariaDB</li><li>SQL</li><li>Git</li><li>Docker</li><li>Linux</li><li>Astro</li></ul><ul class="pf-tools__list" aria-hidden="true"><li>Python</li><li>Pandas</li><li>Django</li><li>MySQL / MariaDB</li><li>SQL</li><li>Git</li><li>Docker</li><li>Linux</li><li>Astro</li></ul></div></div></section>
+<div class="pv" style="padding-top:var(--space-3)"><span class="pv-cap">Com prefers-reduced-motion: lista estática que quebra linha, sem botão de pausa.</span></div>
+<script>var s=document.getElementById('tools'),b=s.querySelector('.pf-tools__pause');b.addEventListener('click',function(){var p=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(p));s.dataset.paused=String(p);b.querySelector('span').textContent=p?'Continuar':'Pausar';b.querySelector('svg').innerHTML=p?'<path d="M8 5.5v13l10.5-6.5z"/>':'<path d="M9 6v12"/><path d="M15 6v12"/>';});</script>
+</body>
+</html>

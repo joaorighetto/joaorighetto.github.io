@@ -1,0 +1,26 @@
+<!-- @dsCard group="Navegação" height=520 subtitle="Fixa no topo; no celular vira menu" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>preview</title>
+<style>
+.a1{fill:var(--accent)} .a2{fill:var(--accent);opacity:.55} .a3{fill:var(--accent);opacity:.28} .a4{fill:var(--accent);opacity:.12}
+.ln{stroke:var(--line);fill:none;stroke-width:1} .lns{stroke:var(--line-strong);fill:none;stroke-width:1.25}
+.pc{fill:var(--bg-raised)} .pa{fill:var(--bg-alt)} .ik{fill:var(--ink)} .im{fill:var(--ink-muted)} .st{stroke:var(--accent);fill:none;stroke-width:1.5}
+.tx{font-family:var(--font-label);font-size:10px;fill:var(--ink-muted);letter-spacing:.04em} .txk{font-family:var(--font-label);font-size:10px;fill:var(--ink)} .txa{font-family:var(--font-label);font-size:10px;fill:var(--accent);font-weight:600}
+</style></head>
+<body>
+<div class="pv" style="padding:0;gap:0">
+<div style="padding:var(--space-4) var(--space-6) var(--space-2)"><span class="pv-cap">Desktop (≥ 900 px) · "Método" em hover</span></div>
+<div style="overflow-x:auto"><header class="pf-nav pf-nav--desktop" style="position:relative;min-width:760px"><div class="pf-wrap pf-nav__inner"><a class="pf-nav__logo" href="#topo"><span class="pf-nav__mono">JMZR</span>João Marcos</a><ul class="pf-nav__links"><li><a class="pf-nav__link" href="#projetos" aria-current="true">Projetos</a></li><li><a class="pf-nav__link" href="#método" data-state="hover">Método</a></li><li><a class="pf-nav__link" href="#sobre">Sobre</a></li><li><a class="pf-nav__link" href="#experiência">Experiência</a></li></ul><a class="pf-btn pf-btn--primary pf-btn--sm pf-nav__cta" href="#contato" style="padding-right:4px">Contato<span class="pf-btn__box" style="width:32px;height:32px"><svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span></a></div></header></div>
+<div style="padding:var(--space-6) var(--space-6) var(--space-2)"><span class="pv-cap">Celular (&lt; 900 px) · menu aberto</span></div>
+<div style="padding:0 var(--space-6) var(--space-6)"><div class="pv-frame" style="max-width:360px">
+<header class="pf-nav pf-nav--mobile" style="position:relative" id="nav-m"><div class="pf-wrap pf-nav__inner"><a class="pf-nav__logo" href="#topo"><span class="pf-nav__mono">JMZR</span>João Marcos</a><button class="pf-nav__toggle" type="button" aria-expanded="true" aria-controls="menu-m" aria-label="Fechar menu"><svg class="pf-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
+<nav class="pf-nav__panel" id="menu-m" aria-label="Principal"><div class="pf-wrap"><ul><li><a class="pf-nav__plink" href="#projetos">Projetos<svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></li><li><a class="pf-nav__plink" href="#método">Método<svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></li><li><a class="pf-nav__plink" href="#sobre">Sobre<svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></li><li><a class="pf-nav__plink" href="#experiência">Experiência<svg class="pf-icon pf-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></li></ul>
+<a class="pf-btn pf-btn--primary" href="#contato">Contato<span class="pf-btn__box"><svg class="pf-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span></a></div></nav></header>
+</div></div></div>
+<script>
+var t=document.querySelector('#nav-m .pf-nav__toggle'),p=document.getElementById('menu-m');
+t.addEventListener('click',function(){var o=t.getAttribute('aria-expanded')==='true';t.setAttribute('aria-expanded',String(!o));t.setAttribute('aria-label',o?'Abrir menu':'Fechar menu');p.hidden=o;t.innerHTML=o?'<svg class="pf-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>':'<svg class="pf-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>';});
+</script>
+</body>
+</html>
