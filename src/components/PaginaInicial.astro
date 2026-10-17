@@ -26,8 +26,8 @@ interface Props { categoria?: Categoria }
 const { categoria } = Astro.props;
 
 const projetos = (await getCollection('projetos', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
-const resultados = await getCollection('resultados');
-const experiencia = await getCollection('experiencia');
+const resultados = (await getCollection('resultados')).sort((a, b) => a.data.order - b.data.order);
+const experiencia = (await getCollection('experiencia')).sort((a, b) => a.data.order - b.data.order);
 const disponiveis = categorias.map((c) => c.nome).filter((nome) => projetos.some((p) => p.data.category === nome));
 const destaque = projetos.find((p) => p.data.seal);
 ---

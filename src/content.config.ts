@@ -67,6 +67,7 @@ const projetos = defineCollection({
 const resultados = defineCollection({
   loader: file('src/content/resultados.yaml'),
   schema: z.object({
+    order: z.number().int(),
     label: z.string(),
     number: z.string(),
     text: z.string(),
@@ -75,10 +76,11 @@ const resultados = defineCollection({
   }),
 });
 
-// Linha do tempo, do mais recente para o mais antigo (a ordem do arquivo é a ordem da página).
+// Linha do tempo, do mais recente para o mais antigo (`order` 1 primeiro).
 const experiencia = defineCollection({
   loader: file('src/content/experiencia.yaml'),
   schema: z.object({
+    order: z.number().int(),
     period: z.string(),
     current: z.boolean().default(false),
     title: z.string(),

@@ -12,4 +12,5 @@ export default defineConfig({
   // Corpo dos projetos: cada "## " vira um bloco numerado do ProjectDetail.
   markdown: { processor: unified({ rehypePlugins: [rehypeSecoes] }) },
   vite: { plugins: [tailwindcss()] },
+  devToolbar: { enabled: false },
 });

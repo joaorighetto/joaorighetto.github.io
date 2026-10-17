@@ -12,7 +12,8 @@ export const site = {
 
 export const hero = {
   overline: 'Python · automação · dados públicos',
-  title: 'Dados públicos coletados automaticamente e <mark class="pf-mark">conferidos com a fonte oficial</mark>',
+  // &shy;: hífen opcional para "automaticamente" caber em 375 px no corpo display (44 px).
+  title: 'Dados públicos coletados automatica&shy;mente e <mark class="pf-mark">conferidos com a fonte oficial</mark>',
   lead: 'Construo coletas, automações e sistemas que entregam dado verificado em formato útil.',
 };
 

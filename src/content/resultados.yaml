@@ -1,6 +1,7 @@
 # Cards de resultado (ResultCard). Só números reais, que o leitor confere na página do projeto indicado.
-# A grade acompanha a quantidade: 1, 2, 3 (3 colunas) ou 4 (2×2).
+# A grade acompanha a quantidade: 1, 2, 3 (3 colunas) ou 4 (2×2). order define a sequência.
 - id: boletins-conferidos
+  order: 1
   label: Eleições · TSE
   number: "187"
   text: boletins de urna conferidos byte a byte
@@ -8,6 +9,7 @@
   project: boletins-urna-pirassununga-2026
 
 - id: cargos-consolidados
+  order: 2
   label: Eleições · TSE
   number: "5"
   text: cargos consolidados em um único CSV
@@ -15,6 +17,7 @@
   project: boletins-urna-pirassununga-2026
 
 - id: relatorios-integrados
+  order: 3
   label: Saneamento · SAEP
   number: "4"
   text: relatórios do sistema de gestão integrados

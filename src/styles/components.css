@@ -287,6 +287,10 @@ a.pf-seal:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 
 section[id], .pf-prose h2[id] { scroll-margin-top: calc(var(--nav-height) + var(--space-4)); }
 /* foto recortada sobre fundo neutro (About/README: "fundo neutro") */
 .pf-about__photo > img { background: var(--bg-alt); object-position: top center; }
+/* hífen opcional (&shy;) do título só no celular estreito, onde a palavra longa não cabe em 44 px */
+@media (min-width: 480px) { .pf-hero .pf-display { hyphens: none; } }
+/* o preflight do Tailwind tira os marcadores; o texto do projeto usa lista com marcador */
+.pf-prose ul { list-style: disc; }
 /* sem foto: só a coluna de texto */
 .pf-about--sem-foto { grid-template-columns: 1fr; max-width: var(--prose-max); }
 
