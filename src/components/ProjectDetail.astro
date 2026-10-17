@@ -19,13 +19,14 @@ const p = projeto.data;
       <span class="pf-label">{p.category}{p.status && <span class="text-ink-muted"> · {p.status}</span>}</span>
       <h1 class="pf-h2 detalhe-titulo">{p.title}</h1>
       <p class="pf-lead">{p.lead}</p>
-      {p.seal && <VerifiedSeal label={p.seal.label} source={p.seal.source} href="#como-conferi" />}
+      {p.seal && <div class="justify-self-start"><VerifiedSeal label={p.seal.label} source={p.seal.source} href="#como-conferi" /></div>}
     </header>
 
+    {/* Na página só entra material real; o esquema de espera fica restrito ao card. */}
     {p.embed ? (
       <div class="mt-8"><EmbedFrame {...p.embed} /></div>
-    ) : (
-      <MediaFrame kind={p.media.kind} src={p.media.src} alt={p.media.alt} class="mt-8 rounded-lg border border-line" eager />
+    ) : p.media.src && (
+      <MediaFrame kind={p.media.kind} src={p.media.src} alt={p.media.alt} class="pf-media--detalhe mt-8 rounded-lg border border-line" eager />
     )}
 
     <div class="pf-detail__layout">
@@ -40,7 +41,7 @@ const p = projeto.data;
         )}
       </div>
 
-      <aside class="pf-meta" aria-label="Ficha do projeto">
+      <aside class="pf-meta self-start" aria-label="Ficha do projeto">
         <dl>
           <div><dt>Categoria</dt><dd>{p.category}</dd></div>
           {p.status && <div><dt>Situação</dt><dd>{p.status}</dd></div>}
